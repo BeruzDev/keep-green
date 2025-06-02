@@ -1,0 +1,36 @@
+name: Keep GitHub Active - Natural Style
+
+on:
+  schedule:
+    - cron: "0 8 * * *" 
+  workflow_dispatch:
+
+jobs:
+  keep-active:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Generar commits aleatorios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          count=$(( (RANDOM % 5) + 1 ))
+          echo "Hoy se harán $count commits"
+
+          for i in $(seq 1 $count)
+          do
+            echo "Commit $i del día: $(date)" >> activity.txt
+            git add activity.txt
+            git commit -m "commit automático $i del día [skip ci]"
+            sleep_time=$(( (RANDOM % 17941) + 60 ))
+            hours=$(( sleep_time / 3600 ))
+            minutes=$(( (sleep_time % 3600) / 60 ))
+            echo "⏱️ Esperando aproximadamente ${hours}h ${minutes}min antes del siguiente commit..."
+            sleep $sleep_time
+          done
+
+          git push
