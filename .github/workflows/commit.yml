@@ -15,8 +15,8 @@ jobs:
 
       - name: Generar commits aleatorios
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "BeruzDev"
+          git config user.email "albertus1291@gmail.com"
 
           count=$(( (RANDOM % 5) + 1 ))
           echo "Hoy se harán $count commits"
@@ -26,12 +26,15 @@ jobs:
             echo "Commit $i del día: $(date)" >> activity.txt
             git add activity.txt
             git commit -m "commit automático $i del día [skip ci]"
-            sleep_time=$(( (RANDOM % 17941) + 60 ))
-            hours=$(( sleep_time / 3600 ))
-            minutes=$(( (sleep_time % 3600) / 60 ))
-            echo "⏱️ Esperando aproximadamente ${hours}h ${minutes}min antes del siguiente commit..."
-            sleep $sleep_time
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+            if [ "$i" -lt "$count" ]; then
+              sleep_time=$(( (RANDOM % 5100) + 300 )) # entre 300s y 5400s
+              hours=$(( sleep_time / 3600 ))
+              minutes=$(( (sleep_time % 3600) / 60 ))
+              echo "⏱️ Esperando aproximadamente ${hours}h ${minutes}min antes del siguiente commit..."
+              sleep $sleep_time
+            fi
           done
 
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+         
 
