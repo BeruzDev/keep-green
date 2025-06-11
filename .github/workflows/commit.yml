@@ -21,7 +21,7 @@ jobs:
           git config user.name "BeruzDev"
           git config user.email "albertus1291@gmail.com"
 
-          count=$(( (RANDOM % 5) + 1 ))
+          count=$(( (RANDOM % 6) + 5 ))
           echo "Hoy se harán $count commits"
 
           for i in $(seq 1 $count)
@@ -31,7 +31,7 @@ jobs:
             git commit -m "commit automático $i del día [skip ci]"
             git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
             if [ "$i" -lt "$count" ]; then
-              sleep_time=$(( (RANDOM % 5100) + 300 )) # entre 300s y 5400s
+              sleep_time=$(( (RANDOM % 1500) + 900 ))
               hours=$(( sleep_time / 3600 ))
               minutes=$(( (sleep_time % 3600) / 60 ))
               echo "⏱️ Esperando aproximadamente ${hours}h ${minutes}min antes del siguiente commit..."
