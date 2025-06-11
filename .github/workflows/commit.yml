@@ -20,24 +20,32 @@ jobs:
         run: |
           git config user.name "BeruzDev"
           git config user.email "albertus1291@gmail.com"
-
-          count=$(( (RANDOM % 6) + 5 ))
+        
+          start_time=$(date +%s)
+          max_duration=16200  
+        
+          count=$(( (RANDOM % 6) + 5 )) 
           echo "Hoy se harán $count commits"
-
+        
           for i in $(seq 1 $count)
           do
             echo "Commit $i del día: $(date)" >> activity.txt
             git add activity.txt
             git commit -m "commit automático $i del día [skip ci]"
             git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+        
             if [ "$i" -lt "$count" ]; then
-              sleep_time=$(( (RANDOM % 1500) + 900 ))
+              current_time=$(date +%s)
+              elapsed=$((current_time - start_time))
+              if [ "$elapsed" -ge "$max_duration" ]; then
+                echo "⏹️ Tiempo máximo alcanzado (${elapsed}s). Terminando antes del siguiente commit."
+                break
+              fi
+        
+              sleep_time=$(( (RANDOM % 1500) + 900 )) 
               hours=$(( sleep_time / 3600 ))
               minutes=$(( (sleep_time % 3600) / 60 ))
               echo "⏱️ Esperando aproximadamente ${hours}h ${minutes}min antes del siguiente commit..."
               sleep $sleep_time
             fi
           done
-
-         
-
