@@ -1,2 +1,1 @@
-# keep-green
-Keep activity on GitHub
+Keep activity on GitHub contribution mosaic!
