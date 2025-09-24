@@ -775,3 +775,4 @@ Commit 3 del día: Sun Sep 21 10:51:48 UTC 2025 - chore: tareas de mantenimiento
 Commit 1 del día: Mon Sep 22 06:36:07 UTC 2025 - update: actualización de dependencias
 Commit 2 del día: Mon Sep 22 09:46:29 UTC 2025 - fix: corrección de errores
 Commit 1 del día: Tue Sep 23 06:34:29 UTC 2025 - add: nueva funcionalidad
+Commit 1 del día: Wed Sep 24 06:34:02 UTC 2025 - test: añadir pruebas
