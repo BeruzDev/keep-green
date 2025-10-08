@@ -812,3 +812,4 @@ Commit 5 del día: Mon Oct  6 11:04:38 UTC 2025 - update: actualización de depe
 Commit 6 del día: Mon Oct  6 11:54:50 UTC 2025 - style: ajustes de formato
 Commit 1 del día: Tue Oct  7 06:34:26 UTC 2025 - docs: actualización de documentación
 Commit 2 del día: Tue Oct  7 10:01:18 UTC 2025 - style: ajustes de formato
+Commit 1 del día: Wed Oct  8 06:34:53 UTC 2025 - test: añadir pruebas
